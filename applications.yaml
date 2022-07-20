@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: applications
+  namespace: cs-jmiller-ddu
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    name: test00-37c0e4
+  project: default
+  source:
+    path: apps
+    repoURL: 'git@github.com:jeremymv2/argo-app-of-apps.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2
