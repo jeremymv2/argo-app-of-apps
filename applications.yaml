@@ -2,22 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: applications
-  namespace: cs-jmiller-ddu
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: argocd
-    name: test00-37c0e4
+    server: https://cs-jmiller-ddu.platform9.net/qbert/v2/932b0f07583842a197464d602fffd7ce/clusters/37c0e49e-70a2-40ae-ad7d-b33a66ced442/k8sapi
   project: default
   source:
     path: apps
-    repoURL: 'git@github.com:jeremymv2/argo-app-of-apps.git'
+    repoURL: 'https://github.com/jeremymv2/argo-app-of-apps.git'
     targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true
-      prune: true
     syncOptions:
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
