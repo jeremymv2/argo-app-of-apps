@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook-suite
+  name: guestbook
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: argocd
+    namespace: guestbook
     server: https://cs-jmiller-ddu.platform9.net/qbert/v4/932b0f07583842a197464d602fffd7ce/clusters/03e3ae46-1fd8-410a-b522-98bc31ccebe2/k8sapi
   project: default
   source:
