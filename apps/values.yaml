@@ -1,6 +1,6 @@
 environment: development
 server:
   development:
-      url: https://cs-jmiller-ddu.platform9.net/qbert/v4/932b0f07583842a197464d602fffd7ce/clusters/03e3ae46-1fd8-410a-b522-98bc31ccebe2/k8sapi
+      url: https://cs-jmiller-ddu.platform9.net/qbert/v2/932b0f07583842a197464d602fffd7ce/clusters/03e3ae46-1fd8-410a-b522-98bc31ccebe2/k8sapi
   production:
-      url: https://cs-jmiller-ddu.platform9.net/qbert/v4/932b0f07583842a197464d602fffd7ce/clusters/03e3ae46-1fd8-410a-b522-98bc31ccebe2/k8sapi
+      url: https://cs-jmiller-ddu.platform9.net/qbert/v2/932b0f07583842a197464d602fffd7ce/clusters/03e3ae46-1fd8-410a-b522-98bc31ccebe2/k8sapi
