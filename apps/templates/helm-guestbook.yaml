@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: guestbook
+  name: helm-guestbook
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: guestbook
+    {{ if eq .Values.environment "development" }}
+    server: {{ .Values.server.development.url }}
+    {{ else if eq .Values.environment "production" }}
+    server: {{ .Values.server.production.url }}
+    {{ end }}
+  project: default
+  source:
+    chart: helm-guestbook
+    repoURL: https://jeremymv2.github.io/helm-guestbook/
+    targetRevision: 0.1.0
+    helm:
+      values: |
+      {{ if eq .Values.environment "development" }}
+        environment: development
+      valueFiles:
+        - /helm-values/helm-guestbook-development.yaml
+      {{ else if eq .Values.environment "production" }}
+        environment: production
+      valueFiles:
+        - /helm-values/helm-guestbook-production.yaml
+      {{ end }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2
